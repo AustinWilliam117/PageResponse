@@ -1,22 +1,46 @@
 - name: 通话明细默认查询
-  base_url: http://10.54.0.30:19048/pbot/audio/iod/report/
+  base_url: 'http://10.54.0.30:19048/pbot/audio/iod/report/'
   request:
-    method: GET
-    request_url: call_list
+    method: 'GET'
+    request_url: 'call_list'
     params:
       conditions:
-        call_time_start: 2024-03-15 00:00:00
-        call_time_end: 2024-03-15 23:59:59
-      #  entrance_id: 107
-      page_size: 20
-      call_label: ""
-      date_start: 202403
-      date_end: 202403
-      flip: ""
-      min_id: 0
-      max_id: 0
-      chiasm: home
+        call_time_start: '2024-03-15 00:00:00'
+        call_time_end: '2024-03-15 23:59:59'
+      #  entrance_id: '107'
+      page_size: '20'
+      call_label: ''
+      date_start: '202403'
+      date_end: '202403'
+      flip: ''
+      min_id: '0'
+      max_id: '0'
+      chiasm: 'home'
   validate:
     - eq:
         - msg
-        - 数据库查询成功
+        - '数据库查询成功'
+
+
+- name: 通话明细默认查询
+  base_url: 'http://10.54.0.30:19048/pbot/audio/iod/report/'
+  request:
+    method: 'GET'
+    request_url: 'call_count'
+    params:
+      conditions:
+        call_time_start: '2024-03-15 00:00:00'
+        call_time_end: '2024-03-15 23:59:59'
+      #  entrance_id: '107'
+      page_size: '20'
+      call_label: ''
+      date_start: '202403'
+      date_end: '202403'
+      flip: ''
+      min_id: '0'
+      max_id: '0'
+      chiasm: 'home'
+  validate:
+    - eq:
+        - msg
+        - '数据库查询成功'
