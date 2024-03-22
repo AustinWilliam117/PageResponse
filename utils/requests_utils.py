@@ -6,6 +6,7 @@ import pytest
 from utils.connect_redis import return_rediskey
 from utils.yaml_utils import read_testcase_yaml
 import urllib.parse
+from utils.log_manager import my_logger
 
 class RequestsUtils:
     session = requests.Session()
@@ -28,6 +29,7 @@ class RequestsUtils:
         res = RequestsUtils.session.request(method=method, url=base_url, headers=headers, **kwargs)
         return res
 
+
     def analysis_yaml(self, caseinfo):
         # 1.testcase.yaml 必须有四个一级关键字：name,base_url,request,validate
         caseinfo_keys = dict(caseinfo).keys()
@@ -42,16 +44,23 @@ class RequestsUtils:
                 # print(self.encode_string(**params))
                 request_url = caseinfo["request"]["request_url"] + "/?" + self.encode_string(**params)
                 # print(request_url)
-                # 如果有上传文件的话，取出文件并删除字典中的key
-                # if jsonpath.jsonpath(caseinfo["request"]["files"]):
-                #     files = [caseinfo["request"]["files"]]
-                #     del caseinfo["request"]["files"]
                 base_url = caseinfo["base_url"] + request_url
                 return (self.send_request(method=method, base_url=base_url, headers={'Token': self.token}),
                         caseinfo["name"],
                         caseinfo["request"]["request_url"])
             else:
-                print("request一级关键字下必须有：method")
+                my_logger.logger.error("request一级关键字下必须有：method")
         else:
-            print("testcase.yaml 必须有四个一级关键字：name,base_url,request,validate")
+            my_logger.logger.error("testcase.yaml 必须有四个一级关键字：name,base_url,request,validate")
 
+
+    """
+        接收response.text的json文本，转换成字典，并返回
+        :return: {'first_id': '', 'last_id': ''}
+    """
+    def analysis_json(self, json_text):
+        id_dict = {'first_id': '', 'last_id': ''}
+        data = json.loads(json_text)
+        id_dict['first_id'] = data['rows'][0]['id']
+        id_dict['last_id'] = data['rows'][-1]['id']
+        return id_dict

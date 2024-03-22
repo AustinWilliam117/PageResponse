@@ -1,0 +1,6 @@
+2024-03-22 16:55:20.046 | INFO     | test_requests:test_page_response:33 - 测试用例: 通话明细默认查询, 请求的参数是: call_list, 响应的时间是: 0:00:00.238427
+2024-03-22 16:55:20.340 | DEBUG    | test_requests:test_page_response:41 - 第一个id的值为: 20344003, 最后一个id的值为: 20343984
+2024-03-22 16:55:20.347 | DEBUG    | test_requests:test_page_response:20 - case flip为down, 已将min_id修改为20343984, chiasm修改为''
+2024-03-22 16:55:21.124 | INFO     | test_requests:test_page_response:33 - 测试用例: 通话明细默认查询, 请求的参数是: call_list, 响应的时间是: 0:00:00.465576
+2024-03-22 16:55:21.327 | DEBUG    | test_requests:test_page_response:41 - 第一个id的值为: 20343983, 最后一个id的值为: 20343964
+2024-03-22 16:55:50.031 | INFO     | test_requests:test_page_response:33 - 测试用例: 通话明细默认查询, 请求的参数是: call_count, 响应的时间是: 0:00:28.074101

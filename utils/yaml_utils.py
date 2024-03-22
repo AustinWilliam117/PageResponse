@@ -41,20 +41,22 @@ def read_testcase_yaml(yaml_path):
 """
 
 
-def write_extract_file(data):
+def write_extract_file(*data):
     with open(get_object_path() + "/extract.yaml", 'a', encoding='utf-8') as f:
-        yaml.dump(data, stream=f, allow_unicode=True)
+        all_data = list(data)
+        yaml.dump(all_data, stream=f, allow_unicode=True)
 
 
 """
     读取extract.yaml文件
+    并返回list中的字典值'first_id'和'last_id'
 """
 
 
-def read_extract_file(yaml_node_name):
+def read_extract_file():
     with open(get_object_path() + "/extract.yaml", 'r', encoding='utf-8') as f:
         yaml_content = yaml.load(f, Loader=yaml.FullLoader)
-        return yaml_content[yaml_node_name]
+        return yaml_content[-1]['first_id'], yaml_content[-1]['last_id']
 
 """
     清空extract.yaml文件

@@ -1,6 +1,10 @@
-# from utils.connect_redis import return_rediskey
-# import pytest
-#
-# @pytest.fixture(scope="class", autouse=True)
-# def get_token():
-#     return_rediskey("PBOT_PHX_4_3")
+import pytest, os
+
+def get_object_path():
+    return os.getcwd().split('utils')[0]
+
+# 清理extract.yaml
+@pytest.fixture(scope="class", autouse=True)
+def clear_extract_file():
+    with open(get_object_path() + "/extract.yaml", 'w', encoding='utf') as f:
+        f.truncate()

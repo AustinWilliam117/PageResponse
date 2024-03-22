@@ -1,0 +1,1 @@
+# 扫描最新生成的日志文件，统计所有的call_count和call_list
